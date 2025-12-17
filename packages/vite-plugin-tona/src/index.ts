@@ -2,7 +2,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
-import type { Plugin, ViteDevServer } from 'vite'
+import type { LibraryFormats, Plugin, UserConfig, ViteDevServer } from 'vite'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -26,6 +26,11 @@ export interface TonaPluginOptions {
    * @default path.join(__dirname, '..', 'public')
    */
   sharedAssetsPath?: string
+  /**
+   * Theme name for build output filename
+   * @default 'theme'
+   */
+  themeName?: string
 }
 
 /**
@@ -36,6 +41,7 @@ export default function tona(options: TonaPluginOptions = {}): Plugin {
     defaultScriptSrc = '/src/main.js',
     baseDir = process.cwd(),
     sharedAssetsPath,
+    themeName = 'theme',
   } = options
 
   // Default path to shared assets
@@ -43,6 +49,40 @@ export default function tona(options: TonaPluginOptions = {}): Plugin {
 
   return {
     name: 'vite-plugin-tona',
+
+    config(config: UserConfig): UserConfig {
+      const entryPath = path.resolve(baseDir, 'src/main.ts')
+      const entryExists = fs.existsSync(entryPath)
+
+      if (!entryExists) {
+        return config
+      }
+
+      const existingLib = config.build?.lib
+      const libConfig =
+        existingLib && typeof existingLib === 'object'
+          ? {
+              ...existingLib,
+              formats: existingLib.formats || (['iife'] as LibraryFormats[]),
+              entry: existingLib.entry || entryPath,
+              name: existingLib.name || themeName,
+              fileName: existingLib.fileName || (() => `${themeName}.min.js`),
+            }
+          : {
+              formats: ['iife'] as LibraryFormats[],
+              entry: entryPath,
+              name: themeName,
+              fileName: () => `${themeName}.min.js`,
+            }
+
+      return {
+        ...config,
+        build: {
+          ...config.build,
+          lib: libConfig,
+        },
+      }
+    },
 
     transformIndexHtml(html) {
       // Dynamic script extension: check main.ts or main.js exists
