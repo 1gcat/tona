@@ -24,7 +24,8 @@
     "es-toolkit": "catalog:",
     "lucide": "catalog:",
     "lucide-preact": "catalog:",
-    "motion": "^12.23.24",
+    "motion": "catalog:",
+    "ogl": "catalog:",
     "preact": "catalog:",
     "tailwind-merge": "catalog:",
     "tona": "workspace:*",
@@ -33,8 +34,7 @@
     "tona-plugins": "workspace:*",
     "tona-sonner": "workspace:*",
     "tona-ui": "workspace:*",
-    "tona-utils": "workspace:*",
-    "ogl": "catalog:"
+    "tona-utils": "workspace:*"
   },
   "devDependencies": {
     "@preact/preset-vite": "catalog:",

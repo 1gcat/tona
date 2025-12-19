@@ -25,11 +25,11 @@
     "tona-plugins": "workspace:*"
   },
   "devDependencies": {
-    "tona-vite": "workspace:*",
     "@types/jquery": "catalog:",
     "@types/node": "catalog:",
     "sass": "catalog:",
     "terser": "catalog:",
+    "tona-vite": "workspace:*",
     "vite": "catalog:"
   }
 }

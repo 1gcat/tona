@@ -12,7 +12,7 @@
     "tona": "latest"
   },
   "devDependencies": {
-    "vite": "latest",
-    "tona-vite": "latest"
+    "tona-vite": "latest",
+    "vite": "latest"
   }
 }

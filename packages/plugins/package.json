@@ -36,14 +36,14 @@
     "dev": "vite"
   },
   "dependencies": {
+    "notyf": "catalog:",
     "tona": "workspace:*",
-    "tona-options": "workspace:*",
-    "notyf": "catalog:"
+    "tona-options": "workspace:*"
   },
   "devDependencies": {
-    "tona-vite": "workspace:*",
     "@types/node": "catalog:",
     "sass": "catalog:",
+    "tona-vite": "workspace:*",
     "vite": "catalog:",
     "vite-plugin-html": "catalog:",
     "vite-plugin-singlefile": "catalog:"
