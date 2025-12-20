@@ -87,6 +87,7 @@
 .custom-markdown ol {
   @apply my-6
     ml-6
+    !pl-0
     list-decimal;
 }
 
