@@ -10,6 +10,20 @@ export function codeCopyButton() {
     const code = block.querySelector('code')
     if (!code) return
 
+    // 检查是否已经有包装器
+    const parent = block.parentElement
+    let wrapper: HTMLElement
+
+    if (parent?.classList.contains('code-block-wrapper')) {
+      wrapper = parent
+    } else {
+      // 创建包装器
+      wrapper = document.createElement('div')
+      wrapper.className = 'code-block-wrapper'
+      block.parentNode?.insertBefore(wrapper, block)
+      wrapper.appendChild(block)
+    }
+
     const btn = document.createElement('button')
     btn.className = 'code-copy-btn'
     btn.type = 'button'
@@ -31,8 +45,7 @@ export function codeCopyButton() {
       }, 1500)
     })
 
-    block.style.position = 'relative'
-    block.appendChild(btn)
+    wrapper.appendChild(btn)
   }
 
   const initCopyButtons = () => {

@@ -4,6 +4,10 @@
   @apply hidden;
 }
 
+.code-block-wrapper {
+  @apply relative;
+}
+
 .code-copy-btn {
   @apply absolute
     top-2
@@ -19,7 +23,7 @@
     transition-all
     shrink-0
     outline-none
-    bg-transparent
+    bg-code
     text-muted-foreground
     cursor-pointer
     focus-visible:border-ring
